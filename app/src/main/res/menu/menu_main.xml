@@ -1,9 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ru.vyakhirev.flickrtool.MainActivity">
+    tools:context="ru.vyakhirev.flickrtool.presentation.view.MainActivity">
+    <item
+    android:id="@+id/action_list"
+    android:icon="@drawable/ic_list"
+    android:title="@string/recent_photo" />
+
+    <item
+        android:id="@+id/action_favoritesPhoto"
+        android:icon="@drawable/ic_favorites"
+        android:title="@string/favorites" />
     <item
         android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
