@@ -1,10 +1,10 @@
 package ru.vyakhirev.flickrtool.data.sources.prefs
 
-//import android.content.Context
-//import android.content.SharedPreferences
-//import android.preference.PreferenceManager
+// import android.content.Context
+// import android.content.SharedPreferences
+// import android.preference.PreferenceManager
 //
-//object PrefsUtils {
+// object PrefsUtils {
 //
 //    // clears all the shared prefs
 //    fun clearSharedPrefs(sp: SharedPreferences) {
@@ -63,4 +63,4 @@ package ru.vyakhirev.flickrtool.data.sources.prefs
 //        editor.putString(key, value)
 //        editor.apply()
 //    }
-//}
+// }

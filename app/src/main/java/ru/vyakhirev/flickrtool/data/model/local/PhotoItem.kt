@@ -1,4 +1,4 @@
-package ru.vyakhirev.flickrtool.data.sources.db
+package ru.vyakhirev.flickrtool.data.model.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -15,5 +15,12 @@ data class PhotoItem(
     var ispublic: Short,
     var url_n: String?,
     var width_n: String?,
-    var height_n: String?
-)
+    var height_n: String?,
+    var isFavorite: Boolean = false
+) {
+    fun getFlickrImageLink(
+        size: Char = 'w'
+    ): String {
+        return "https://farm$farm.staticflickr.com/$server/${id}_${secret}_$size.jpg"
+    }
+}

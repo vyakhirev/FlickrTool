@@ -24,5 +24,13 @@ data class Photo(
      * */
     var indexInResponse: Int = -1
 
-    fun getImageUrl() = "https://farm$farm.staticflickr.com/$server/${id}_${secret}_m.jpg"
+//    @GlideModule
+//    class CustomGlideModule : AppGlideModule()
+
+    //    fun getImageUrl() = "https://farm$farm.staticflickr.com/$server/${id}_${secret}_m.jpg"
+    fun getFlickrImageLink(
+        size: Char = 'w'
+    ): String {
+        return "https://farm$farm.staticflickr.com/$server/${id}_${secret}_$size.jpg"
+    }
 }

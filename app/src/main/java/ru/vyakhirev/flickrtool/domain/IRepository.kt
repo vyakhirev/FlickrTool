@@ -1,13 +1,30 @@
 package ru.vyakhirev.flickrtool.domain
 
-import io.reactivex.Single
+import io.reactivex.Flowable
 import retrofit2.Response
-import ru.vyakhirev.flickrtool.data.sources.db.PhotoItem
-import ru.vyakhirev.flickrtool.data.sources.remote.FlickrResponse
+import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
+import ru.vyakhirev.flickrtool.data.model.remote.ResponsePhotoItemHolder
 
-interface IRepository {
+interface IRepository : AppDataSource {
 
-    fun getRecentPhoto(api_key: String, page: Int, per_Page: Int): Single<Response<FlickrResponse>>
+    fun getSearchResults(
+        query: String,
+        page: Int,
+        per_Page: Int
+    ): Flowable<List<PhotoItem>>
 
-    fun updatePhotoItemList(photoItems: List<PhotoItem>)
+//    fun updatePhotoItemList(photoItems: List<PhotoItem>)
+
+    fun getRecentPhotos(
+        page: Int,
+        per_Page: Int
+    ): Flowable<Response<ResponsePhotoItemHolder>>
+
+    fun getCachedPhotoItems(): Flowable<List<PhotoItem>>
+
+    fun getPaginationStatus(): Boolean
+
+    fun getPageNumber(): Int
+
+    fun getMaxPageNumber(): Int
 }
