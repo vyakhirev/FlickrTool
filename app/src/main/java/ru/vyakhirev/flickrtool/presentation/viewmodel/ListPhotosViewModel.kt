@@ -1,0 +1,44 @@
+package ru.vyakhirev.flickrtool.presentation.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
+import ru.vyakhirev.flickrtool.data.sources.repository.RepositoryImpl
+import ru.vyakhirev.flickrtool.data.sources.repository.db.LocalDataSource
+import ru.vyakhirev.flickrtool.data.sources.repository.remote.RemoteDataSource
+import ru.vyakhirev.flickrtool.domain.usecases.GetPhotoSearchUseCase
+
+class ListPhotosViewModel : ViewModel() {
+    private val disposable = CompositeDisposable()
+    var page = 1
+    var perPage = 30
+
+    private val localDataSource = LocalDataSource()
+    private val remoteDataSource = RemoteDataSource()
+
+    var repository =
+        RepositoryImpl(localDataSource, remoteDataSource)
+
+    val getPhotoSearchUseCase = GetPhotoSearchUseCase(repository)
+
+    private val _photos = MutableLiveData<MutableList<PhotoItem>>()
+    val photos: LiveData<MutableList<PhotoItem>> = _photos
+
+    fun getPhoto(query: String) {
+        disposable.add(
+            getPhotoSearchUseCase.execute(query, page, perPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        _photos.value = it.photo
+                    }, {
+                    }
+                )
+        )
+    }
+}
