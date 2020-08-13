@@ -12,13 +12,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.listphoto_fragment.*
+import ru.vyakhirev.flickrtool.App
 import ru.vyakhirev.flickrtool.R
-import ru.vyakhirev.flickrtool.data.model.Photo
+import ru.vyakhirev.flickrtool.data.model.PhotoData
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
+import ru.vyakhirev.flickrtool.di.components.DaggerActivityComponent
 import ru.vyakhirev.flickrtool.presentation.view.adapters.AdapterListPhoto
 import ru.vyakhirev.flickrtool.presentation.viewmodel.ListPhotosViewModel
-import ru.vyakhirev.flickrtool.presentation.viewmodel.factory.ViewModelFactory
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,15 +28,26 @@ import ru.vyakhirev.flickrtool.presentation.viewmodel.factory.ViewModelFactory
 class ListPhotosFragment : Fragment() {
 
     companion object {
-        const val URL = "image_url"
+        const val IMAGE_URL = "image_url"
     }
 
+    init {
+        DaggerActivityComponent.builder()
+            .appComponent(App.instance!!.component)
+            .build()
+            .inject(this)
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     lateinit var viewModel: ListPhotosViewModel
+
     private lateinit var adapter: AdapterListPhoto
     private var favClickListener: OnPhotoClickListener? = null
 
     interface OnPhotoClickListener {
-        fun onPhotoClick(photo: Photo)
+        fun onPhotoClick(photo: PhotoData)
     }
 
     override fun onCreateView(
@@ -52,11 +65,11 @@ class ListPhotosFragment : Fragment() {
         adapter =
             AdapterListPhoto(
                 requireContext(),
-                listOf(),
+                mutableListOf(),
                 bigPhotoClickListener = {
                     val bundle = Bundle()
                     bundle.apply {
-                        putString(URL, it.getFlickrImageLink('z'))
+                        putString(IMAGE_URL, it.getFlickrImageLink('z'))
                     }
                     Navigation.findNavController(view).navigate(R.id.BigPhotoFragment, bundle)
                 }
@@ -83,14 +96,14 @@ class ListPhotosFragment : Fragment() {
 
         viewModel = ViewModelProvider(
             requireActivity(),
-            ViewModelFactory()
-        ).get(ListPhotosViewModel::class.java)
+            viewModelFactory
+        )[ListPhotosViewModel::class.java]
 
-        viewModel.getPhoto("Linux tux")
+        viewModel.getPhoto("F1")
 
         viewModel.photos.observe(
             viewLifecycleOwner,
-            Observer<List<PhotoItem>> { adapter.update(it) })
+            Observer<MutableList<PhotoItem>> { adapter.update(it) })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

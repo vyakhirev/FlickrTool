@@ -6,24 +6,23 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
-import ru.vyakhirev.flickrtool.data.sources.repository.RepositoryImpl
-import ru.vyakhirev.flickrtool.data.sources.repository.db.LocalDataSource
-import ru.vyakhirev.flickrtool.data.sources.repository.remote.RemoteDataSource
 import ru.vyakhirev.flickrtool.domain.usecases.GetPhotoSearchUseCase
 
-class ListPhotosViewModel : ViewModel() {
+class ListPhotosViewModel @Inject
+constructor(private val getPhotoSearchUseCase: GetPhotoSearchUseCase) : ViewModel() {
     private val disposable = CompositeDisposable()
     var page = 1
     var perPage = 30
 
-    private val localDataSource = LocalDataSource()
-    private val remoteDataSource = RemoteDataSource()
+//    private val localDataSource = LocalDataSource()
+//    private val remoteDataSource = RemoteDataSource(flickrApiClient)
+//
+//    var repository =
+//        RepositoryImpl(localDataSource, remoteDataSource)
 
-    var repository =
-        RepositoryImpl(localDataSource, remoteDataSource)
-
-    val getPhotoSearchUseCase = GetPhotoSearchUseCase(repository)
+//    val getPhotoSearchUseCase = GetPhotoSearchUseCase(repository)
 
     private val _photos = MutableLiveData<MutableList<PhotoItem>>()
     val photos: LiveData<MutableList<PhotoItem>> = _photos
@@ -40,5 +39,9 @@ class ListPhotosViewModel : ViewModel() {
                     }
                 )
         )
+    }
+
+    override fun onCleared() {
+        disposable.clear()
     }
 }

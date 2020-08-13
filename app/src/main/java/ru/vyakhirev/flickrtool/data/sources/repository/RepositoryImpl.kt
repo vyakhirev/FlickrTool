@@ -2,20 +2,23 @@ package ru.vyakhirev.flickrtool.data.sources.repository
 
 import androidx.annotation.VisibleForTesting
 import io.reactivex.Flowable
+import javax.inject.Inject
 import retrofit2.Response
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 import ru.vyakhirev.flickrtool.data.model.remote.PhotoResult
 import ru.vyakhirev.flickrtool.data.model.remote.ResponsePhotoItemHolder
-import ru.vyakhirev.flickrtool.data.sources.remote.FlickrApiClient
-import ru.vyakhirev.flickrtool.data.sources.repository.db.LocalDataSource
+import ru.vyakhirev.flickrtool.data.sources.remote.FlickrApiService
 import ru.vyakhirev.flickrtool.data.sources.repository.remote.RemoteDataSource
-import ru.vyakhirev.flickrtool.domain.IRepository
+import ru.vyakhirev.flickrtool.domain.Repository
 
-class RepositoryImpl(
-    private val localDataSource: LocalDataSource,
-    private val remoteDataSource: RemoteDataSource
-) : IRepository {
+class RepositoryImpl @Inject
+    constructor(
+//    private val localDataSource: LocalDataSource,
+        private val remoteDataSource: RemoteDataSource
+    ) : Repository {
 
+    @Inject
+    lateinit var FlickrApiClient: FlickrApiService
     //    var page=1
 //    var per_Page=30
     @VisibleForTesting
@@ -93,7 +96,7 @@ class RepositoryImpl(
         page: Int,
         per_Page: Int
     ): Flowable<Response<ResponsePhotoItemHolder>> {
-        return FlickrApiClient.FLICKR_API_CLIENT.getRecent(
+        return FlickrApiClient.getRecent(
             page,
             per_Page
         )

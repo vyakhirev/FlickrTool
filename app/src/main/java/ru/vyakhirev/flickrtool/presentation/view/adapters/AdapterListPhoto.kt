@@ -14,7 +14,7 @@ import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 
 class AdapterListPhoto(
     private val context: Context,
-    private var photos: List<PhotoItem>,
+    private var photos: MutableList<PhotoItem>,
     val bigPhotoClickListener: ((photo: PhotoItem) -> Unit)?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -35,8 +35,10 @@ class AdapterListPhoto(
                 bigPhotoClickListener?.invoke(photos[position])
             }
     }
-
-    fun update(data: List<PhotoItem>) {
+    fun addItems(items: MutableList<PhotoItem?>) {
+        items.addAll(items)
+    }
+    fun update(data: MutableList<PhotoItem>) {
         val movieDiffUtilCallback = DiffCallback(photos, data)
         val diffResult = DiffUtil.calculateDiff(movieDiffUtilCallback)
         photos = data

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "photos_table")
 
-data class Photo(
+data class PhotoData(
     @PrimaryKey
     @SerializedName("id") val id: String,
     @SerializedName("farm") val farm: Int,

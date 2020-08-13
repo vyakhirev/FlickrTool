@@ -5,7 +5,7 @@ import retrofit2.Response
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 import ru.vyakhirev.flickrtool.data.model.remote.ResponsePhotoItemHolder
 
-interface IRepository : AppDataSource {
+interface Repository : AppDataSource {
 
     fun getSearchResults(
         query: String,
