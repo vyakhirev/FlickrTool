@@ -15,10 +15,6 @@ class RepositoryImpl @Inject
         private val remoteDataSource: RemoteDataSource
     ) : Repository {
 
-//    @Inject
-//    lateinit var FlickrApiClient: FlickrApiService
-    //    var page=1
-//    var per_Page=30
     @VisibleForTesting
     internal var cachedPhotoItemList: MutableList<PhotoItem> = mutableListOf()
 

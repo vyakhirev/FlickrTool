@@ -3,9 +3,6 @@ package ru.vyakhirev.flickrtool.utils
 object FlickrParams {
 
     const val DEFAULT_PAGE_SIZE = 30
-    const val DEFAULT_QUERY = "nature"
-    const val API_KEY = "aa26679bb06bff46497df7f1e970b178"
-
     const val METHOD_SEARCH_RECENT = "flickr.photos.getRecent"
     const val METHOD_SEARCH = "flickr.photos.search"
 
@@ -20,14 +17,4 @@ object FlickrParams {
     const val MEDIUM_1024 = "b"
     const val LARGE_1600 = "h"
     const val LARGE_2048 = "k"
-
-    fun getFlickrImageLink(
-        id: String,
-        secret: String,
-        serverId: String,
-        farmId: Int,
-        size: String
-    ): String {
-        return "https://farm$farmId.staticflickr.com/$serverId/${id}_${secret}_$size.jpg"
-    }
 }

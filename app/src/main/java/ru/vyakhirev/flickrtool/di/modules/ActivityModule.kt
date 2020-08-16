@@ -21,8 +21,4 @@ class ActivityModule(private val mainActivity: AppCompatActivity) {
         return mainActivity
     }
 
-//    @Provides
-//    internal fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory {
-//        return factory
-//    }
 }

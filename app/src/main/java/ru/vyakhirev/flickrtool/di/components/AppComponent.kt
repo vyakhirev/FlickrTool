@@ -8,6 +8,7 @@ import ru.vyakhirev.flickrtool.App
 import ru.vyakhirev.flickrtool.data.sources.db.AppDatabase
 import ru.vyakhirev.flickrtool.data.sources.remote.FlickrApiService
 import ru.vyakhirev.flickrtool.di.modules.ApiModule
+import ru.vyakhirev.flickrtool.di.modules.AppModule
 import ru.vyakhirev.flickrtool.di.modules.viewmodels.ViewModelModule
 import ru.vyakhirev.flickrtool.di.qualifiers.ApplicationContext
 
@@ -15,6 +16,7 @@ import ru.vyakhirev.flickrtool.di.qualifiers.ApplicationContext
 @Component(
     modules = [
         ApiModule::class,
+        AppModule::class,
         ViewModelModule::class
     ]
 )
