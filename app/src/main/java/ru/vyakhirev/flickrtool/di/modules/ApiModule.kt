@@ -58,16 +58,4 @@ class ApiModule {
     fun provideFlickrApiService(): FlickrApiService {
         return retrofit.create(FlickrApiService::class.java)
     }
-
-//    @Provides
-//    @Singleton
-//    internal fun providesNetworkService(retrofit: Retrofit): NetworkApiService {
-//        return retrofit.create(NetworkApiService::class.java)
-//    }
-
-//    @Provides
-//    @Singleton
-//    open fun apiClient(): FlickrApiClient {
-//        return FlickrApiClient()
-//    }
 }

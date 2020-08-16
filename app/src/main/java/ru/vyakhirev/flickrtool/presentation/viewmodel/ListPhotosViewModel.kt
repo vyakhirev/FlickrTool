@@ -16,14 +16,6 @@ constructor(private val getPhotoSearchUseCase: GetPhotoSearchUseCase) : ViewMode
     var page = 1
     var perPage = 30
 
-//    private val localDataSource = LocalDataSource()
-//    private val remoteDataSource = RemoteDataSource(flickrApiClient)
-//
-//    var repository =
-//        RepositoryImpl(localDataSource, remoteDataSource)
-
-//    val getPhotoSearchUseCase = GetPhotoSearchUseCase(repository)
-
     private val _photos = MutableLiveData<MutableList<PhotoItem>>()
     val photos: LiveData<MutableList<PhotoItem>> = _photos
 

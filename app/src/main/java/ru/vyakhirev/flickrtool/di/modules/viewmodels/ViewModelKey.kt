@@ -1,4 +1,4 @@
-package ru.vyakhirev.flickrtool.di
+package ru.vyakhirev.flickrtool.di.modules.viewmodels
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

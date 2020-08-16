@@ -1,9 +1,7 @@
 package ru.vyakhirev.flickrtool.domain
 
 import io.reactivex.Flowable
-import retrofit2.Response
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
-import ru.vyakhirev.flickrtool.data.model.remote.ResponsePhotoItemHolder
 
 interface Repository : AppDataSource {
 
@@ -15,10 +13,10 @@ interface Repository : AppDataSource {
 
 //    fun updatePhotoItemList(photoItems: List<PhotoItem>)
 
-    fun getRecentPhotos(
-        page: Int,
-        per_Page: Int
-    ): Flowable<Response<ResponsePhotoItemHolder>>
+//    fun getRecentPhotos(
+//        page: Int,
+//        per_Page: Int
+//    ): Flowable<Response<ResponsePhotoItemHolder>>
 
     fun getCachedPhotoItems(): Flowable<List<PhotoItem>>
 

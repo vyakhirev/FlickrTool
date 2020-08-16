@@ -5,25 +5,24 @@ import android.content.Context
 import dagger.Component
 import javax.inject.Singleton
 import ru.vyakhirev.flickrtool.App
+import ru.vyakhirev.flickrtool.data.sources.db.AppDatabase
 import ru.vyakhirev.flickrtool.data.sources.remote.FlickrApiService
-import ru.vyakhirev.flickrtool.di.modules.*
+import ru.vyakhirev.flickrtool.di.modules.ApiModule
+import ru.vyakhirev.flickrtool.di.modules.viewmodels.ViewModelModule
 import ru.vyakhirev.flickrtool.di.qualifiers.ApplicationContext
 
 @Singleton
 @Component(
     modules = [
-        AppModule::class,
-        DataModule::class,
         ApiModule::class,
-        RepositoryModule::class,
         ViewModelModule::class
     ]
 )
 interface AppComponent {
 
-//    fun getAppRepository(): Repository
-
     fun getApiService(): FlickrApiService
+
+    fun getAppDatabase(): AppDatabase
 
     fun inject(app: App)
 

@@ -7,22 +7,22 @@ import androidx.room.RoomDatabase
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 
 @Database(entities = [PhotoItem::class], version = 1)
-abstract class FlickrDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun imageItemDao(): PhotoItemDao
 
     companion object {
         @Volatile
-        private var INSTANCE: FlickrDatabase? = null
+        private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context): FlickrDatabase {
+        fun getDatabase(context: Context): AppDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }
             val instance = Room.databaseBuilder(
                 context.applicationContext,
-                FlickrDatabase::class.java,
+                AppDatabase::class.java,
                 "flickrdatabase"
             ).build()
             INSTANCE = instance

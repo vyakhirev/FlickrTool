@@ -1,5 +1,10 @@
 package ru.vyakhirev.flickrtool.presentation.viewmodel
 
-// class FavoritesPhotosViewModel : ViewModel() {
-//    // TODO: Implement the ViewModel
-// }
+import androidx.lifecycle.ViewModel
+import javax.inject.Inject
+import ru.vyakhirev.flickrtool.domain.usecases.GetPhotoSearchUseCase
+
+class FavoritesPhotosViewModel @Inject
+constructor(private val getPhotoSearchUseCase: GetPhotoSearchUseCase) : ViewModel() {
+    // TODO: Implement the ViewModel
+}

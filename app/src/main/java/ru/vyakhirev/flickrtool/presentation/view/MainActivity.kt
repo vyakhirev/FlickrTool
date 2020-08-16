@@ -12,19 +12,14 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.vyakhirev.flickrtool.App
 import java.util.*
 import java.util.concurrent.TimeUnit
 import ru.vyakhirev.flickrtool.R
 import ru.vyakhirev.flickrtool.data.model.PhotoData
+import ru.vyakhirev.flickrtool.di.components.DaggerActivityComponent
 
 class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListener {
-
-//    init {
-//        DaggerActivityComponent.builder()
-//            .appComponent()
-//            .build()
-//            .inject(this)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

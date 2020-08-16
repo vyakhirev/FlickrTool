@@ -1,4 +1,4 @@
-package ru.vyakhirev.flickrtool.presentation.viewmodel.factory
+package ru.vyakhirev.flickrtool.di.modules.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

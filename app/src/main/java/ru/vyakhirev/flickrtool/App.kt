@@ -12,10 +12,6 @@ class App : MultiDexApplication() {
             private set
     }
 
-//    @Inject
-//    lateinit var repository: Repository
-
-    // Needed to replace the component with a test specific one
     lateinit var component: AppComponent
 
     override fun onCreate() {

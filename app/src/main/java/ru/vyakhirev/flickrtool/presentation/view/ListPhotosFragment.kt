@@ -99,7 +99,7 @@ class ListPhotosFragment : Fragment() {
             viewModelFactory
         )[ListPhotosViewModel::class.java]
 
-        viewModel.getPhoto("F1")
+        viewModel.getPhoto("Moscow Cremlin")
 
         viewModel.photos.observe(
             viewLifecycleOwner,

@@ -3,22 +3,20 @@ package ru.vyakhirev.flickrtool.data.sources.repository
 import androidx.annotation.VisibleForTesting
 import io.reactivex.Flowable
 import javax.inject.Inject
-import retrofit2.Response
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 import ru.vyakhirev.flickrtool.data.model.remote.PhotoResult
-import ru.vyakhirev.flickrtool.data.model.remote.ResponsePhotoItemHolder
-import ru.vyakhirev.flickrtool.data.sources.remote.FlickrApiService
+import ru.vyakhirev.flickrtool.data.sources.repository.db.LocalDataSource
 import ru.vyakhirev.flickrtool.data.sources.repository.remote.RemoteDataSource
 import ru.vyakhirev.flickrtool.domain.Repository
 
 class RepositoryImpl @Inject
     constructor(
-//    private val localDataSource: LocalDataSource,
+        private val localDataSource: LocalDataSource,
         private val remoteDataSource: RemoteDataSource
     ) : Repository {
 
-    @Inject
-    lateinit var FlickrApiClient: FlickrApiService
+//    @Inject
+//    lateinit var FlickrApiClient: FlickrApiService
     //    var page=1
 //    var per_Page=30
     @VisibleForTesting
@@ -92,15 +90,16 @@ class RepositoryImpl @Inject
         return getPhotoSearchResult(query, page, per_Page).map { t: PhotoResult -> t.photo }
     }
 
-    override fun getRecentPhotos(
-        page: Int,
-        per_Page: Int
-    ): Flowable<Response<ResponsePhotoItemHolder>> {
-        return FlickrApiClient.getRecent(
-            page,
-            per_Page
-        )
-    }
+//    override fun getRecentPhotos(
+//        page: Int,
+//        per_Page: Int
+//    ): Flowable<Response<ResponsePhotoItemHolder>> {
+//        return getSearchResults("fs",page,per_Page)
+//        return FlickrApiClient.getRecent(
+//            page,
+//            per_Page
+//        )
+//    }
 
     override fun updatePhotoItemList(photoItems: List<PhotoItem>) {
     }

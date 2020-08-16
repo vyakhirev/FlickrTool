@@ -1,6 +1,5 @@
 package ru.vyakhirev.flickrtool.data.model.remote
 
-import java.util.*
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 
 data class PhotoResult(
