@@ -109,4 +109,9 @@ class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListene
 //        val nav_Controller=findNavController(R.id.nav_host_fragment)
 //        nav_Controller.navigate(R.id.BigPhotoFragment)
     }
+
+    override fun onStarClick(photo: PhotoData) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -4,6 +4,7 @@ import dagger.Component
 import ru.vyakhirev.flickrtool.di.modules.ActivityModule
 import ru.vyakhirev.flickrtool.di.modules.viewmodels.ViewModelModule
 import ru.vyakhirev.flickrtool.di.scopes.PerActivity
+import ru.vyakhirev.flickrtool.presentation.view.FavoritesPhotosFragment
 import ru.vyakhirev.flickrtool.presentation.view.ListPhotosFragment
 import ru.vyakhirev.flickrtool.presentation.view.MainActivity
 
@@ -20,4 +21,6 @@ interface ActivityComponent {
     fun inject(mainActivity: MainActivity)
 
     fun inject(listPhotosFragment: ListPhotosFragment)
+
+    fun inject(favoritesPhotos: FavoritesPhotosFragment)
 }

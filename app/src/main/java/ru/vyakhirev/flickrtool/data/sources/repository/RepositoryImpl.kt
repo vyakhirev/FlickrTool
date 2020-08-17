@@ -1,19 +1,20 @@
 package ru.vyakhirev.flickrtool.data.sources.repository
 
 import androidx.annotation.VisibleForTesting
+import io.reactivex.Completable
 import io.reactivex.Flowable
-import javax.inject.Inject
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 import ru.vyakhirev.flickrtool.data.model.remote.PhotoResult
 import ru.vyakhirev.flickrtool.data.sources.repository.db.LocalDataSource
 import ru.vyakhirev.flickrtool.data.sources.repository.remote.RemoteDataSource
 import ru.vyakhirev.flickrtool.domain.Repository
+import javax.inject.Inject
 
 class RepositoryImpl @Inject
-    constructor(
-        private val localDataSource: LocalDataSource,
-        private val remoteDataSource: RemoteDataSource
-    ) : Repository {
+constructor(
+    private val localDataSource: LocalDataSource,
+    private val remoteDataSource: RemoteDataSource
+) : Repository {
 
     @VisibleForTesting
     internal var cachedPhotoItemList: MutableList<PhotoItem> = mutableListOf()
@@ -24,10 +25,20 @@ class RepositoryImpl @Inject
     @VisibleForTesting
     internal var maxPageNumber: Int = 0
 
-    var paginationEndPoint: Boolean = false
+    var paginationEndPoint = true
 
     @VisibleForTesting
     internal var cacheIsDirty = false
+    override fun getPhotoSearchResult(
+        query: String,
+        page: Int,
+        perPage: Int
+    ): Flowable<PhotoResult> {
+        return if (cacheIsDirty)
+            getItemFromServerDB(query, page, perPage)
+        else
+            getItemFromLocalDB(query, page, perPage)
+    }
 
     private fun getItemFromServerDB(
         query: String,
@@ -37,16 +48,33 @@ class RepositoryImpl @Inject
         return remoteDataSource
             .getPhotoSearchResult(query, page, perPage)
             .doOnNext {
-                val items = it.photo
-                // mLocalAppDataSource.updatePhotoItemList(items)
+                localDataSource.updatePhotoItemList(it.photo)
                 if (page <= 1)
                     cachedPhotoItemList.clear()
                 if (it.page >= it.pages)
                     paginationEndPoint = true
                 currentPageNumber = it.page
                 maxPageNumber = it.pages
-                cachedPhotoItemList.addAll(items)
+                cachedPhotoItemList.addAll(it.photo)
                 cacheIsDirty = false
+            }
+    }
+
+    private fun getItemFromLocalDB(
+        query: String,
+        page: Int,
+        perPage: Int
+    ): Flowable<PhotoResult> {
+        return localDataSource
+            .getPhotoSearchResult(query,page,perPage)
+            .doOnNext {
+                if (page <= 1)
+                    cachedPhotoItemList.clear()
+                if (it.page >= it.pages)
+                    paginationEndPoint = true
+                currentPageNumber = it.page
+                maxPageNumber = it.pages
+                cachedPhotoItemList.addAll(it.photo)
             }
     }
 
@@ -120,11 +148,27 @@ class RepositoryImpl @Inject
         TODO("Not yet implemented")
     }
 
-    override fun getPhotoSearchResult(
-        query: String,
-        page: Int,
-        perPage: Int
-    ): Flowable<PhotoResult> {
-        return getItemFromServerDB(query, page, perPage)
+    override fun switchFavorite(photoItem: PhotoItem):Completable {
+       return localDataSource.switchFavorite(photoItem)
     }
+
+    override fun getFavorites(): Flowable<List<PhotoItem>> {
+       return localDataSource.getFavorites()
+    }
+
+
+//    override fun getPhotoSearchResult(
+//        query: String,
+//        page: Int,
+//        perPage: Int
+//    ): Flowable<PhotoResult> {
+//        return getItemFromLocalDB(query,page,perPage)
+//    }
+//    override fun getPhotoSearchResult(
+//        query: String,
+//        page: Int,
+//        perPage: Int
+//    ): Flowable<PhotoResult> {
+//        return getItemFromServerDB(query,page,perPage)
+//    }
 }

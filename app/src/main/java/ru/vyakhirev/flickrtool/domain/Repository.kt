@@ -1,5 +1,6 @@
 package ru.vyakhirev.flickrtool.domain
 
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
 
@@ -25,4 +26,8 @@ interface Repository : AppDataSource {
     fun getPageNumber(): Int
 
     fun getMaxPageNumber(): Int
+
+    fun switchFavorite(photoItem: PhotoItem):Completable
+
+    fun getFavorites(): Flowable<List<PhotoItem>>
 }
