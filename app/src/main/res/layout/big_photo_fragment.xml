@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.BigPhotoFragment">
 
-    <!--    <ru.vyakhirev.flickrtool.presentation.view.RoundedCornerImageView-->
+    <!--    <ru.vyakhirev.listphoto_module.RoundedCornerImageView-->
     <!--        android:id="@+id/photo_IV"-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"-->
