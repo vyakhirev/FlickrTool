@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/FavoritesPhotosFragment"
-        android:name="ru.vyakhirev.flickrtool.presentation.view.FavoritesPhotos"
+        android:name="ru.vyakhirev.flickrtool.presentation.view.FavoritesPhotosFragment"
         android:label="favorites_photo_fragment"
         tools:layout="@layout/favorites_photo_fragment" >
         <action

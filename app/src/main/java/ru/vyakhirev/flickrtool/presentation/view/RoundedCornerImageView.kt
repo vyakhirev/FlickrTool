@@ -16,10 +16,6 @@ class RoundedCornerImageView : androidx.appcompat.widget.AppCompatImageView {
 
     private var heightRatio: Float = 0.0f
 
-    constructor(context: Context) : super(context) {
-        // do something
-    }
-
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         init(context, attrs)
     }

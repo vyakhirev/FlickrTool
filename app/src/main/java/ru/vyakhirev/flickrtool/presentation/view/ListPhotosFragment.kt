@@ -1,6 +1,7 @@
 package ru.vyakhirev.flickrtool.presentation.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +13,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import javax.inject.Inject
 import kotlinx.android.synthetic.main.listphoto_fragment.*
+import ru.vyakhirev.flickrtool.App
 import ru.vyakhirev.flickrtool.R
-import ru.vyakhirev.flickrtool.data.model.Photo
+import ru.vyakhirev.flickrtool.data.model.PhotoData
 import ru.vyakhirev.flickrtool.data.model.local.PhotoItem
-import ru.vyakhirev.flickrtool.presentation.view.adapters.AdapterListPhoto
+import ru.vyakhirev.flickrtool.di.components.DaggerActivityComponent
+import ru.vyakhirev.flickrtool.presentation.view.adapters.ListPhotoAdapter
 import ru.vyakhirev.flickrtool.presentation.viewmodel.ListPhotosViewModel
-import ru.vyakhirev.flickrtool.presentation.viewmodel.factory.ViewModelFactory
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,15 +29,28 @@ import ru.vyakhirev.flickrtool.presentation.viewmodel.factory.ViewModelFactory
 class ListPhotosFragment : Fragment() {
 
     companion object {
-        const val URL = "image_url"
+        const val IMAGE_URL = "image_url"
     }
 
+    init {
+        DaggerActivityComponent.builder()
+            .appComponent(App.instance!!.component)
+            .build()
+            .inject(this)
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
     lateinit var viewModel: ListPhotosViewModel
-    private lateinit var adapter: AdapterListPhoto
+
+    private lateinit var adapter: ListPhotoAdapter
     private var favClickListener: OnPhotoClickListener? = null
+    private var favStarClickListener: OnPhotoClickListener? = null
 
     interface OnPhotoClickListener {
-        fun onPhotoClick(photo: Photo)
+        fun onPhotoClick(photo: PhotoData)
+        fun onStarClick(photo: PhotoData)
     }
 
     override fun onCreateView(
@@ -50,16 +66,22 @@ class ListPhotosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter =
-            AdapterListPhoto(
+            ListPhotoAdapter(
                 requireContext(),
-                listOf(),
+                mutableListOf(),
                 bigPhotoClickListener = {
                     val bundle = Bundle()
                     bundle.apply {
-                        putString(URL, it.getFlickrImageLink('z'))
+                        putString(IMAGE_URL, it.getFlickrImageLink('z'))
                     }
                     Navigation.findNavController(view).navigate(R.id.BigPhotoFragment, bundle)
-                }
+                },
+               favorStarClickListener = {
+                   Log.d("volttier",it.title!!)
+                   it.isFavorite=!it.isFavorite
+                   viewModel.switchFavorite(it)
+                   adapter.notifyDataSetChanged()
+               }
             )
         listPhotoRV.layoutManager = GridLayoutManager(context, 2)
         listPhotoRV.adapter = adapter
@@ -83,14 +105,14 @@ class ListPhotosFragment : Fragment() {
 
         viewModel = ViewModelProvider(
             requireActivity(),
-            ViewModelFactory()
-        ).get(ListPhotosViewModel::class.java)
+            viewModelFactory
+        )[ListPhotosViewModel::class.java]
 
-        viewModel.getPhoto("Linux tux")
+        viewModel.getPhoto("Elefant")
 
         viewModel.photos.observe(
             viewLifecycleOwner,
-            Observer<List<PhotoItem>> { adapter.update(it) })
+            Observer<MutableList<PhotoItem>> { adapter.update(it) })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -98,6 +120,7 @@ class ListPhotosFragment : Fragment() {
 
         if (activity is OnPhotoClickListener) {
             favClickListener = activity as OnPhotoClickListener
+            favStarClickListener = activity as OnPhotoClickListener
         } else {
             throw Exception("Activity must implement ClickListener")
         }

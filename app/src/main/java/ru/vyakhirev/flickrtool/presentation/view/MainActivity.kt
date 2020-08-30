@@ -12,11 +12,12 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.vyakhirev.flickrtool.App
 import java.util.*
 import java.util.concurrent.TimeUnit
 import ru.vyakhirev.flickrtool.R
-import ru.vyakhirev.flickrtool.data.model.Photo
-import ru.vyakhirev.flickrtool.presentation.viewmodel.ListPhotosViewModel
+import ru.vyakhirev.flickrtool.data.model.PhotoData
+import ru.vyakhirev.flickrtool.di.components.DaggerActivityComponent
 
 class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListener {
 
@@ -27,15 +28,14 @@ class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListene
         setupNavigation()
     }
 
-    lateinit var viewModel: ListPhotosViewModel
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_search, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)
-        val searchView: SearchView? = searchItem.actionView as SearchView
+        val searchView: SearchView = searchItem.actionView as SearchView
 
         Observable.create(ObservableOnSubscribe<String> { subscriber ->
-            searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     subscriber.onNext(query!!)
                     return false
@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListene
     private fun setupNavigation() {
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-//        bottomNavigation.findViewById<BottomNavigationItemView>(R.id.action_search).visibility=View.GONE
+//        bottomNavigation.findViewById<BottomNavigationItemView>(R.id.action_search).visibility=
+//            View.INVISIBLE
     }
 
     private val mOnNavigationItemSelectedListener =
@@ -88,8 +89,8 @@ class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListene
                     nav_Controller.navigate(R.id.BigPhotoFragment)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.action_search -> {
-                }
+//                R.id.action_search -> {
+//                }
             }
             false
         }
@@ -104,8 +105,13 @@ class MainActivity : AppCompatActivity(), ListPhotosFragment.OnPhotoClickListene
         }
     }
 
-    override fun onPhotoClick(photo: Photo) {
+    override fun onPhotoClick(photo: PhotoData) {
 //        val nav_Controller=findNavController(R.id.nav_host_fragment)
 //        nav_Controller.navigate(R.id.BigPhotoFragment)
     }
+
+    override fun onStarClick(photo: PhotoData) {
+        TODO("Not yet implemented")
+    }
+
 }

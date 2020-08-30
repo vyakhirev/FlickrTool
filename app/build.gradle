@@ -10,11 +10,16 @@ android {
 
     defaultConfig {
         applicationId "ru.vyakhirev.flickrtool"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.incremental":"true"]
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -26,6 +31,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,10 +53,11 @@ def retrofit_version = '2.9.0'
 def okHttp_version='4.8.1'
 def rxJavaVersion = '2.1.1'
 def room_version = '2.2.5'
-//def daggerVersion = '2.28'
+def dagger_version = '2.28'
 def paging_version = '2.1.2'
 def photoView_version='2.3.0'
-def multidex_version = "2.0.1"
+def multidex_version = '2.0.1'
+def glide_version='4.11.0'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -68,6 +75,7 @@ dependencies {
 
     //Multidex
     implementation "androidx.multidex:multidex:$multidex_version"
+//    implementation 'com.android.support:multidex:1.0.3'
 
     //Navigation AAC
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
@@ -78,7 +86,7 @@ dependencies {
 
     //Paging library
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
-    // alternatively - without Android dependencies for testing
+//     alternatively - without Android dependencies for testing
     testImplementation "androidx.paging:paging-common-ktx:$paging_version"
     // RxJava support
     implementation "androidx.paging:paging-rxjava2-ktx:$paging_version"
@@ -96,20 +104,23 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
     implementation "androidx.room:room-rxjava2:$room_version"
-//    implementation 'android.arch.persistence.room:rxjava2:2.1.1'
+    implementation 'android.arch.persistence.room:rxjava2:2.1.1'
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
-    //Dagger2
-//    implementation "com.google.dagger:dagger:$daggerVersion"
-//    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-//    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-//    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+//    Dagger2
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //My modules
+    implementation project(':core')
 }
