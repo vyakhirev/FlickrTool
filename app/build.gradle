@@ -123,4 +123,5 @@ dependencies {
 
     //My modules
     implementation project(':core')
+    implementation project(':listPhoto_module')
 }

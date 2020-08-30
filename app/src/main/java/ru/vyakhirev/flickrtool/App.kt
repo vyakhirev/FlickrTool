@@ -3,7 +3,6 @@ package ru.vyakhirev.flickrtool
 import androidx.multidex.MultiDexApplication
 import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.core_api.mediator.ProvidersFacade
-import ru.vyakhirev.flickrtool.di.components.AppComponent
 
 class App : MultiDexApplication(), AppWithFacade {
 

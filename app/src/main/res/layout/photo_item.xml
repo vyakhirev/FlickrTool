@@ -24,7 +24,7 @@
             android:contentDescription="@string/starr_off"
             app:srcCompat="@drawable/ic_star_off" />
 
-        <ru.vyakhirev.flickrtool.presentation.view.RoundedCornerImageView
+        <ImageView
             android:id="@+id/photo_IV"
             android:layout_width="175dp"
             android:layout_height="237dp"
@@ -32,7 +32,7 @@
             android:background="@color/light_grey"
             android:contentDescription="@string/photo"
             android:scaleType="centerCrop"
-            app:corner="16dp" />
+             />
 
         <TextView
             android:id="@+id/title_TV"

@@ -20,23 +20,5 @@ class ViewModelModule {
     fun bindsFactory(map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>): ViewModelProvider.Factory {
         return ViewModelFactoryProvider(map)
     }
+
 }
-//@Module
-//abstract class ViewModelModule {
-//
-//    @Binds
-//    @PerActivity
-//    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(ListPhotosViewModel::class)
-//    @PerActivity
-//    abstract fun bindsListPhotosViewModel(listPhotosViewModel: ListPhotosViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(FavoritesPhotosViewModel::class)
-//    @PerActivity
-//    abstract fun bindsFavoritesPhotosViewModel(favoritesPhotosViewModel: FavoritesPhotosViewModel): ViewModel
-//}
