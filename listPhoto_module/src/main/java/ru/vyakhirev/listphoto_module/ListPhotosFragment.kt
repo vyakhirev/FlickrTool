@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.listphoto_fragment.*
 import ru.vyakhirev.core_api.dto.PhotoItem
 import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.listphoto_module.adapter.ListPhotoAdapter
+import ru.vyakhirev.listphoto_module.di.EagerTrigger
 import ru.vyakhirev.listphoto_module.di.ListPhotoComponent
 import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
 import javax.inject.Inject
@@ -28,6 +29,11 @@ class ListPhotosFragment : Fragment() {
     private lateinit var adapter: ListPhotoAdapter
     private lateinit var viewModel: ListPhotosViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var eagerTrigger: EagerTrigger
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +47,7 @@ class ListPhotosFragment : Fragment() {
 
     }
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,25 +98,10 @@ class ListPhotosFragment : Fragment() {
                 }
             }
         })
-
-
-
-
         viewModel.getPhoto("Elefant")
-
         viewModel.photos.observe(
             viewLifecycleOwner,
             Observer<MutableList<PhotoItem>> { adapter.update(it) })
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-
-//        if (activity is OnPhotoClickListener) {
-//            favClickListener = activity as OnPhotoClickListener
-//            favStarClickListener = activity as OnPhotoClickListener
-//        } else {
-//            throw Exception("Activity must implement ClickListener")
-//        }
-//    }
 }

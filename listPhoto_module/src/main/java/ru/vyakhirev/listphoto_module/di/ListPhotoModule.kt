@@ -15,12 +15,18 @@ abstract class ListPhotoModule {
 
         @Provides
         @Singleton
+        @JvmStatic
         fun provideListPhotoViewModel(
             map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>,
             getPhotoSearchUseCase: GetPhotoSearchUseCase
         ): ViewModel = ListPhotosViewModel(getPhotoSearchUseCase).also {
             map[ListPhotosViewModel::class.java] = it
         }
-
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun provideDummy(viewModel: ViewModel) = EagerTrigger()
     }
 }
+
+class EagerTrigger

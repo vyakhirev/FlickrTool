@@ -7,14 +7,8 @@ import ru.vyakhirev.core_api.mediator.ProvidersFacade
 class App : MultiDexApplication(), AppWithFacade {
 
     companion object {
-        var instance: App? = null
-            private set
-
         private var facadeComponent: FacadeComponent? = null
     }
-
-    lateinit var component: AppComponent
-
 
     override fun getFacade(): ProvidersFacade {
         return facadeComponent ?: FacadeComponent.init(this).also {
@@ -22,17 +16,6 @@ class App : MultiDexApplication(), AppWithFacade {
         }
     }
 
-    //    override fun onCreate() {
-//        super.onCreate()
-//
-//        component = DaggerAppComponent.builder()
-//            .appModule(AppModule(this))
-//            .build()
-//
-//        component.inject(this)
-//
-//        instance = this
-//    }
     override fun onCreate() {
         super.onCreate()
         (getFacade() as FacadeComponent).inject(this)

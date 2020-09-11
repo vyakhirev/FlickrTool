@@ -12,6 +12,7 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import ru.vyakhirev.core_api.mediator.AppWithFacade
 import java.util.*
 import java.util.concurrent.TimeUnit
 import ru.vyakhirev.listphoto_module.ListPhotosFragment
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MainComponent.create((application as AppWithFacade).getFacade()).inject(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         setupNavigation()

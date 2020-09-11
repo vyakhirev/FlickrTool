@@ -4,12 +4,12 @@ import android.app.Application
 import dagger.Component
 import ru.vyakhirev.core.CoreProvidersFactory
 import ru.vyakhirev.core_api.database.DatabaseProvider
+import ru.vyakhirev.core_api.datasource.RepositoryProvider
 import ru.vyakhirev.core_api.mediator.AppProvider
 import ru.vyakhirev.core_api.mediator.ProvidersFacade
 
 @Component(
-    dependencies = [AppProvider::class, DatabaseProvider::class]
-//    modules = [MediatorsBindings::class]
+    dependencies = [AppProvider::class, DatabaseProvider::class,RepositoryProvider::class]
 )
 interface FacadeComponent : ProvidersFacade {
 
@@ -18,6 +18,7 @@ interface FacadeComponent : ProvidersFacade {
         fun init(application: Application): FacadeComponent =
             DaggerFacadeComponent.builder()
                 .appProvider(AppComponent.create(application))
+                .repositoryProvider(CoreProvidersFactory.createRepositoryBuilder(AppComponent.create(application)))
                 .databaseProvider(CoreProvidersFactory.createDatabaseBuilder(AppComponent.create(application)))
                 .build()
     }

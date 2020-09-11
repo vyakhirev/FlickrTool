@@ -1,4 +1,4 @@
-package ru.vyakhirev.core_api.viewmodel
+package ru.vyakhirev.listphoto_module.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey
