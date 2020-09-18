@@ -1,4 +1,4 @@
-package ru.vyakhirev.listphoto_module
+package ru.vyakhirev.favorphoto_module
 
 import android.os.Bundle
 import android.util.Log
@@ -11,23 +11,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.listphoto_fragment.*
+import kotlinx.android.synthetic.main.favories_photos_fragment.*
 import ru.vyakhirev.core_api.dto.PhotoItem
 import ru.vyakhirev.core_api.mediator.AppWithFacade
-import ru.vyakhirev.listphoto_module.adapter.ListPhotoAdapter
-import ru.vyakhirev.listphoto_module.di.ListPhotoComponent
-import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
+import ru.vyakhirev.favorphoto_module.adapter.FavoritesPhotoAdapter
+import ru.vyakhirev.favorphoto_module.di.FavoritesPhotoComponent
+import ru.vyakhirev.favorphoto_module.viewmodel.FavoritesPhotoViewModel
 import javax.inject.Inject
 
-class ListPhotosFragment : Fragment() {
+class FavoritePhotosFragment : Fragment() {
 
     companion object {
         const val IMAGE_URL = "image_url"
-        fun newInstance()=ListPhotosFragment()
+        fun newInstance()=FavoritePhotosFragment()
     }
 
-    private lateinit var adapter: ListPhotoAdapter
-    private lateinit var viewModel: ListPhotosViewModel
+    private lateinit var adapter: FavoritesPhotoAdapter
+    private lateinit var viewModel: FavoritesPhotoViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -35,12 +35,12 @@ class ListPhotosFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        ListPhotoComponent.create((requireActivity().application as AppWithFacade).getFacade())
+        FavoritesPhotoComponent.create((requireActivity().application as AppWithFacade).getFacade())
             .inject(this)
         viewModel = ViewModelProvider(
             this,
             viewModelFactory
-        ).get(ListPhotosViewModel::class.java)
+        ).get(FavoritesPhotoViewModel::class.java)
 
     }
 
@@ -50,14 +50,14 @@ class ListPhotosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.listphoto_fragment, container, false)
+        return inflater.inflate(R.layout.favories_photos_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter =
-            ListPhotoAdapter(
+            FavoritesPhotoAdapter(
                 requireContext(),
                 mutableListOf(),
                 bigPhotoClickListener = {

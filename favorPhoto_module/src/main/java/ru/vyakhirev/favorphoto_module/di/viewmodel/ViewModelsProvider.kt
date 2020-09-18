@@ -1,8 +1,7 @@
-package ru.vyakhirev.listphoto_module.di.viewmodel
+package ru.vyakhirev.favorphoto_module.di.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.vyakhirev.core_api.datasource.Repository
 
 interface ViewModelsProvider {
 

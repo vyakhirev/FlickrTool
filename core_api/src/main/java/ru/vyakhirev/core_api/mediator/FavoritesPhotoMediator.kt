@@ -1,8 +1,8 @@
 package ru.vyakhirev.core_api.mediator
 
-//import android.content.Context
-//
-//interface FavoritesPhotoMediator {
-//
-//    fun openFavoritesPhotoScreen(context: Context)
-//}
+import androidx.fragment.app.FragmentManager
+
+interface FavoritesPhotoMediator {
+
+    fun openFavoritesPhotoScreen(containerId:Int,fragmentManager: FragmentManager)
+}

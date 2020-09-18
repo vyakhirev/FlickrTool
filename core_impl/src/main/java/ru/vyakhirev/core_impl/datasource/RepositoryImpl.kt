@@ -26,16 +26,16 @@ constructor(
     var paginationEndPoint = true
 
     @VisibleForTesting
-    internal var cacheIsDirty = false
+    internal var cacheIsDirty = true
     override fun getPhotoSearchResult(
         query: String,
         page: Int,
         perPage: Int
     ): Flowable<PhotoResult> {
-        return if (cacheIsDirty)
-            getItemFromServerDB(query, page, perPage)
-        else
-            getItemFromLocalDB(query, page, perPage)
+//        return if (cacheIsDirty)
+          return  getItemFromServerDB(query, page, perPage)
+//        else
+//            getItemFromLocalDB(query, page, perPage)
     }
 
     private fun getItemFromServerDB(

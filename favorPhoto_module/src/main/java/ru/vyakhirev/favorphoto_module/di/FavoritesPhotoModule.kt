@@ -1,12 +1,11 @@
-package ru.vyakhirev.listphoto_module.di
+package ru.vyakhirev.favorphoto_module.di
 
 import androidx.lifecycle.ViewModel
 import dagger.Module
 import dagger.Provides
 import ru.vyakhirev.core_api.usecases.GetPhotoSearchUseCase
-import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
+import ru.vyakhirev.favorphoto_module.viewmodel.FavoritesPhotoViewModel
 import javax.inject.Singleton
-
 
 @Module
 abstract class ListPhotoModule {
@@ -17,11 +16,10 @@ abstract class ListPhotoModule {
         @Singleton
         @JvmStatic
         fun provideListPhotoViewModel(
-            map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>,
+            map: @JvmSuppressWildcards HashMap<Class<out ViewModel>, ViewModel>,
             getPhotoSearchUseCase: GetPhotoSearchUseCase
-        ): ViewModel = ListPhotosViewModel(getPhotoSearchUseCase).also {
-            map[ListPhotosViewModel::class.java] = it
+        ): ViewModel = FavoritesPhotoViewModel(getPhotoSearchUseCase).also {
+            map[FavoritesPhotoViewModel::class.java] = it
         }
     }
 }
-

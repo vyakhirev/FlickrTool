@@ -13,17 +13,26 @@ import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import ru.vyakhirev.core_api.mediator.AppWithFacade
+import ru.vyakhirev.core_api.mediator.FavoritesPhotoMediator
+import ru.vyakhirev.core_api.mediator.ListPhotoMediator
 import java.util.*
 import java.util.concurrent.TimeUnit
-import ru.vyakhirev.listphoto_module.ListPhotosFragment
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var listPhotoMediator: ListPhotoMediator
+
+    @Inject
+    lateinit var favoritesPhotoMediator: FavoritesPhotoMediator
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setContentView(R.layout.activity_main)
         super.onCreate(savedInstanceState)
         MainComponent.create((application as AppWithFacade).getFacade()).inject(this)
-        setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+//        listPhotoMediator.openListPhotoScreen(R.id.fragmentContainer,supportFragmentManager)
         setupNavigation()
     }
 
@@ -75,23 +84,27 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
 
                 R.id.action_list -> {
-//                    nav_Controller.navigate(R.id.ListPhotosFragment)
-                    supportFragmentManager.popBackStack()
-                    openFragment(ListPhotosFragment())
+                    listPhotoMediator.openListPhotoScreen(
+                        R.id.fragmentContainer,
+                        supportFragmentManager
+                    )
                     return@OnNavigationItemSelectedListener true
                 }
 
-//                R.id.action_favoritesPhoto -> {
-//                    nav_Controller.navigate(R.id.FavoritesPhotosFragment)
-//                    return@OnNavigationItemSelectedListener true
-//                }
-//
-//                R.id.action_settings -> {
+                R.id.action_favoritesPhoto -> {
+                    favoritesPhotoMediator.openFavoritesPhotoScreen(
+                        R.id.fragmentContainer,
+                        supportFragmentManager
+                    )
+                    return@OnNavigationItemSelectedListener true
+                }
+
+                R.id.action_settings -> {
 //                    nav_Controller.navigate(R.id.BigPhotoFragment)
-//                    return@OnNavigationItemSelectedListener true
-//                }
-//                R.id.action_search -> {
-//                }
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.action_search -> {
+                }
             }
             false
         }
@@ -105,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment, fragment.tag)

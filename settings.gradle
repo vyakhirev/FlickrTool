@@ -1,3 +1,5 @@
+include ':settings_module'
+include ':favorPhoto_module'
 include ':favoritesPhoto_module'
 include ':listPhoto_module'
 include ':core_api'

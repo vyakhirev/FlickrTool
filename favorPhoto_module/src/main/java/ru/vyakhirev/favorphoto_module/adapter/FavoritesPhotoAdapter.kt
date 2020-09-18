@@ -1,4 +1,4 @@
-package ru.vyakhirev.listphoto_module.adapter
+package ru.vyakhirev.favorphoto_module.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,13 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.photo_item.view.*
 import ru.vyakhirev.core_api.dto.PhotoItem
-import ru.vyakhirev.listphoto_module.R
+import ru.vyakhirev.favorphoto_module.R
 
-class ListPhotoAdapter(
+class FavoritesPhotoAdapter(
     private val context: Context,
     private var photos: MutableList<PhotoItem>,
     val bigPhotoClickListener: ((photo: PhotoItem) -> Unit)?,
-    val favorStarClickListener:((photo: PhotoItem) -> Unit)?
+    val favorStarClickListener: ((photo: PhotoItem) -> Unit)?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -31,8 +31,8 @@ class ListPhotoAdapter(
             holder.itemView.photo_IV.setOnClickListener {
                 bigPhotoClickListener?.invoke(photos[position])
             }
-        if(holder is ViewHolderPhotoItem)
-            holder.itemView.favor_Star.setOnClickListener{
+        if (holder is ViewHolderPhotoItem)
+            holder.itemView.favor_Star.setOnClickListener {
                 favorStarClickListener?.invoke(photos[position])
             }
     }
