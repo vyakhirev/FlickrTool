@@ -14,28 +14,26 @@ constructor(
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
 
-    @VisibleForTesting
+//    @VisibleForTesting
     internal var cachedPhotoItemList: MutableList<PhotoItem> = mutableListOf()
 
-    @VisibleForTesting
     internal var currentPageNumber: Int = 0
 
-    @VisibleForTesting
     internal var maxPageNumber: Int = 0
 
     var paginationEndPoint = true
 
-    @VisibleForTesting
     internal var cacheIsDirty = true
+
     override fun getPhotoSearchResult(
         query: String,
         page: Int,
         perPage: Int
     ): Flowable<PhotoResult> {
-//        return if (cacheIsDirty)
-          return  getItemFromServerDB(query, page, perPage)
-//        else
-//            getItemFromLocalDB(query, page, perPage)
+        return if (cacheIsDirty)
+            getItemFromServerDB(query, page, perPage)
+        else
+            getItemFromLocalDB(query, page, perPage)
     }
 
     private fun getItemFromServerDB(
@@ -131,7 +129,7 @@ constructor(
     }
 
     override fun getCachedPhotoItems(): Flowable<List<PhotoItem>> {
-        TODO("Not yet implemented")
+        return Flowable.just(cachedPhotoItemList)
     }
 
     override fun getPaginationStatus(): Boolean {

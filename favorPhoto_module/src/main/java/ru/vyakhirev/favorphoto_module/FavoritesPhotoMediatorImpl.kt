@@ -9,7 +9,7 @@ class FavoritesPhotoMediatorImpl
 
     override fun openFavoritesPhotoScreen(containerId: Int, fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(containerId, FavoritePhotosFragment.newInstance())
+            .replace(containerId, FavoritePhotosFragment.newInstance())
             .commit()
     }
 }

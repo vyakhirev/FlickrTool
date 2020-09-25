@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.listphoto_fragment.*
+import kotlinx.android.synthetic.main.photo_item.view.*
 import ru.vyakhirev.core_api.dto.PhotoItem
 import ru.vyakhirev.core_api.mediator.AppWithFacade
+import ru.vyakhirev.core_api.mediator.BigPhotoMediator
 import ru.vyakhirev.listphoto_module.adapter.ListPhotoAdapter
 import ru.vyakhirev.listphoto_module.di.ListPhotoComponent
 import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
@@ -23,7 +25,7 @@ class ListPhotosFragment : Fragment() {
 
     companion object {
         const val IMAGE_URL = "image_url"
-        fun newInstance()=ListPhotosFragment()
+        fun newInstance() = ListPhotosFragment()
     }
 
     private lateinit var adapter: ListPhotoAdapter
@@ -31,6 +33,9 @@ class ListPhotosFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var bigPhotoMediator: BigPhotoMediator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +70,18 @@ class ListPhotosFragment : Fragment() {
                     bundle.apply {
                         putString(IMAGE_URL, it.getFlickrImageLink('z'))
                     }
-//                    Navigation.findNavController(view).navigate(R.id.BigPhotoFragment, bundle)
+//                    activity.application.
+//                    bigPhotoMediator.openBigPhotoScreen(
+//                        parentFragmentManager
+//                    )
+//                    fragmentManager?.beginTransaction()
+//                        ?.replace(R.id.fragmentContainer, ListPhotosFragment.newInstance())
+//                        ?.commit()
                 },
                 favorStarClickListener = {
                     Log.d("volttier", it.title!!)
                     it.isFavorite = !it.isFavorite
-//                    viewModel.switchFavorite(it)
+                    viewModel.switchFavorite(it)
                     adapter.notifyDataSetChanged()
                 }
             )

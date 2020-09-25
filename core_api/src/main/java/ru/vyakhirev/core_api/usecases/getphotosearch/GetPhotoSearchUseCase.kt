@@ -1,12 +1,9 @@
-package ru.vyakhirev.core_api.usecases
+package ru.vyakhirev.core_api.usecases.getphotosearch
 
 import io.reactivex.Flowable
 import ru.vyakhirev.core_api.datasource.Repository
 import ru.vyakhirev.core_api.dto.PhotoResult
 import javax.inject.Inject
-
-//import io.reactivex.Flowable
-//import javax.inject.Inject
 
 class GetPhotoSearchUseCase @Inject
 constructor(private val repository: Repository) {

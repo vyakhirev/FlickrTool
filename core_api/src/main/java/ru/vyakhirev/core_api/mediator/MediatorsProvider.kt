@@ -6,4 +6,5 @@ interface MediatorsProvider {
 
     fun provideFavoritesPhotoMediator():FavoritesPhotoMediator
 
+    fun provideBigPhotoMediator():BigPhotoMediator
 }

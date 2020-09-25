@@ -15,8 +15,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+        vectorDrawables.useSupportLibrary = true
     }
-
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -29,6 +32,7 @@ def room_version = '2.2.5'
 def dagger_version = '2.28'
 def rxJavaVersion = '2.1.1'
 def glide_version='4.11.0'
+def photoView_version = '2.3.0'
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -41,9 +45,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.2.0'
-
     implementation project(':core')
 
+    //PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.
+    implementation "com.github.chrisbanes:PhotoView:$photoView_version"
     //    Dagger2
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"

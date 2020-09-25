@@ -15,5 +15,5 @@ interface AppDataSource {
 
     fun getRecentPhoto(): Flowable<PhotoResult>
 
-
+//    fun getFavoritesPhoto(): Flowable<PhotoResult>
 }
