@@ -18,9 +18,10 @@ abstract class ListPhotoModule {
         @Singleton
         @JvmStatic
         fun provideListPhotoViewModel(
-            map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>,
-            getPhotoSearchUseCase: GetPhotoSearchUseCase
-        ): ViewModel = ListPhotosViewModel(getPhotoSearchUseCase).also {
+            map: @JvmSuppressWildcards HashMap<Class<out ViewModel>, ViewModel>,
+            getPhotoSearchUseCase: GetPhotoSearchUseCase,
+            switchFavoritesUseCase: SwitchFavoritesUseCase
+        ): ViewModel = ListPhotosViewModel(getPhotoSearchUseCase,switchFavoritesUseCase).also {
             map[ListPhotosViewModel::class.java] = it
         }
     }

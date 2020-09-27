@@ -16,15 +16,17 @@ import javax.inject.Singleton
     dependencies = [ProvidersFacade::class,ViewModelsProvider::class]
 )
 interface ListPhotoComponent : ViewModelsProvider {
-    @Binds
-    @Singleton
-    abstract fun bindsRepo(repository: RepositoryImpl): Repository
+
     companion object {
 
         fun create(providersFacade: ProvidersFacade): ListPhotoComponent {
+            val vmComponent = DaggerViewModelComponent
+                .builder()
+                .providersFacade(providersFacade)
+                .build()
             return DaggerListPhotoComponent
                 .builder()
-                .viewModelsProvider(DaggerViewModelComponent.builder().build())
+                .viewModelsProvider(vmComponent)
                 .providersFacade(providersFacade)
                 .build()
         }

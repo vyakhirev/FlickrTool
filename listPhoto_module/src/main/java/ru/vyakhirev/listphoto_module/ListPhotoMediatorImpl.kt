@@ -13,7 +13,7 @@ class ListPhotoMediatorImpl
     override fun openListPhotoScreen(containerId: Int, fragmentManager: FragmentManager) {
 
         fragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .setCustomAnimations(R.anim.to_left_in, R.anim.to_left_out, R.anim.to_right_in, R.anim.to_right_out)
             .replace(containerId, ListPhotosFragment.newInstance())
             .commit()
     }

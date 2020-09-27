@@ -9,7 +9,8 @@ import ru.vyakhirev.core_api.mediator.AppProvider
 import ru.vyakhirev.core_api.mediator.ProvidersFacade
 
 @Component(
-    dependencies = [AppProvider::class, DatabaseProvider::class,RepositoryProvider::class]
+    dependencies = [AppProvider::class, DatabaseProvider::class, RepositoryProvider::class],
+    modules = [MediatorsBindings::class]
 )
 interface FacadeComponent : ProvidersFacade {
 
