@@ -29,9 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8dp"
             android:contentDescription="@string/photo"
-            android:scaleType="fitCenter"
-            />
-<!--            app:corner="8dp" />-->
+            android:scaleType="fitCenter" />
+
 
         <TextView
             android:id="@+id/title_TV"
@@ -45,4 +44,12 @@
             app:layout_constraintTop_toBottomOf="@+id/photo_IV"
             tools:text="Eclipse in Alps" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView><!--        <ru.vyakhirev.listphoto_module.RoundedCornerImageView-->
+    <!--            android:id="@+id/photo_IV"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_margin="@dimen/margin_8dp"-->
+    <!--            android:contentDescription="@string/photo"-->
+    <!--            android:scaleType="fitCenter"-->
+    <!--            app:corner="8dp" />-->
+    <!--&lt;!&ndash;        />&ndash;&gt;-->

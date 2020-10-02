@@ -1,6 +1,5 @@
 package ru.vyakhirev.listphoto_module.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,7 +16,7 @@ constructor(
     private val getPhotoSearchUseCase: GetPhotoSearchUseCase,
     private val switchFavoritesUseCase: SwitchFavoritesUseCase
 ) : ViewModel() {
-    private val disposable = CompositeDisposable()
+    var disposable = CompositeDisposable()
     var page = 1
     var perPage = 30
 
@@ -29,7 +28,7 @@ constructor(
             switchFavoritesUseCase.execute(photoItem)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, { Log.d("kan", it.message.toString()) })
+                .subscribe({}, { })
         )
     }
 

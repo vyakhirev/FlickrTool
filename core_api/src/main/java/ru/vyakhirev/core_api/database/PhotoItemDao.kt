@@ -18,10 +18,9 @@ interface PhotoItemDao {
 
     @Query("SELECT * FROM photos WHERE isFavorite = :itemIsFavorite")
     fun getFavorites(itemIsFavorite:Boolean): Flowable<List<PhotoItem>>
-    //    @Query("SELECT * FROM photos WHERE Title like :query")
-//    fun SearchPhotosByTitle(query: String): Flowable<List<PhotoItem>>
+
     @Query("SELECT * FROM photos ")
-    fun SearchPhotosByTitle(): Flowable<List<PhotoItem>>
+    fun searchPhotosByTitle(): Flowable<List<PhotoItem>>
 
     @Query("SELECT * FROM photos")
     fun fetchItems(): Flowable<List<PhotoItem>>

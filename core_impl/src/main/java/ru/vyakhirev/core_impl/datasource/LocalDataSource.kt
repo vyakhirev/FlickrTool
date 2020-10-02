@@ -18,7 +18,7 @@ constructor(private val flickrDatabase: AppDatabase) : AppDataSource {
         perPage: Int
     ): Flowable<PhotoResult> {
 //        TODO("Not yet implemented")
-        return flickrDatabase.photosItemDao().SearchPhotosByTitle()
+        return flickrDatabase.photosItemDao().searchPhotosByTitle()
             .flatMap { photos ->
                 Observable.just(
                     PhotoResult(

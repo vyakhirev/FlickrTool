@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.listphoto_fragment.*
-import kotlinx.android.synthetic.main.photo_item.view.*
 import ru.vyakhirev.core_api.dto.PhotoItem
 import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.core_api.mediator.BigPhotoMediator
@@ -70,6 +69,7 @@ class ListPhotosFragment : Fragment() {
                     bundle.apply {
                         putString(IMAGE_URL, it.getFlickrImageLink('z'))
                     }
+
 //                    activity.application.
 //                    bigPhotoMediator.openBigPhotoScreen(
 //                        parentFragmentManager
