@@ -10,7 +10,7 @@ import ru.vyakhirev.favorphoto_module.R
 
 class FavoritesPhotoAdapter(
     private val context: Context,
-    private var photos: MutableList<PhotoItem>,
+    private var photos: List<PhotoItem>,
     val bigPhotoClickListener: ((photo: PhotoItem) -> Unit)?,
     val favorStarClickListener: ((photo: PhotoItem) -> Unit)?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -41,7 +41,7 @@ class FavoritesPhotoAdapter(
         items.addAll(items)
     }
 
-    fun update(data: MutableList<PhotoItem>) {
+    fun update(data: List<PhotoItem>) {
 //        val movieDiffUtilCallback = DiffCallback(photos, data)
 //        val diffResult = DiffUtil.calculateDiff(movieDiffUtilCallback)
         photos = data

@@ -15,9 +15,11 @@ import io.reactivex.schedulers.Schedulers
 import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.core_api.mediator.FavoritesPhotoMediator
 import ru.vyakhirev.core_api.mediator.ListPhotoMediator
+import ru.vyakhirev.core_api.usecases.getphotosearch.GetPhotoSearchUseCase
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var favoritesPhotoMediator: FavoritesPhotoMediator
+
+    @Inject
+    lateinit var getPhotoSearchUseCase: GetPhotoSearchUseCase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.activity_main)
@@ -67,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 Log.d("tux", it)
+                getPhotoSearchUseCase.execute(it, 1, 25)
             }
         return true
     }

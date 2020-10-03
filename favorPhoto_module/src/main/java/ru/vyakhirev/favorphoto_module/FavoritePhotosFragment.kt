@@ -70,7 +70,7 @@ class FavoritePhotosFragment : Fragment() {
                 favorStarClickListener = {
                     Log.d("volttier", it.title!!)
                     it.isFavorite = !it.isFavorite
-//                    viewModel.switchFavorite(it)
+                    viewModel.switchFavorite(it)
                     adapter.notifyDataSetChanged()
                 }
             )
@@ -89,14 +89,14 @@ class FavoritePhotosFragment : Fragment() {
                     ))
                 ) {
                     viewModel.page++
-                    viewModel.getPhoto("birds")
+                    viewModel.getFavoritesPhoto()
                 }
             }
         })
-        viewModel.getPhoto("Moon")
+        viewModel.getFavoritesPhoto()
         viewModel.photos.observe(
             viewLifecycleOwner,
-            Observer<MutableList<PhotoItem>> {
+            Observer<List<PhotoItem>> {
                 adapter.update(it)
             })
     }

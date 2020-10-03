@@ -9,7 +9,8 @@ class FavoritesPhotoMediatorImpl
 
     override fun openFavoritesPhotoScreen(containerId: Int, fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
-            .add(containerId, FavoritePhotosFragment.newInstance())
+            .setCustomAnimations( R.anim.to_right_in, R.anim.to_right_out,R.anim.to_left_in, R.anim.to_left_out)
+            .replace(containerId, FavoritePhotosFragment.newInstance())
             .commit()
     }
 }

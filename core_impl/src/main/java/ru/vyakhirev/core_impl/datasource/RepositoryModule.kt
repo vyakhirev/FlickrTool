@@ -15,12 +15,6 @@ private const val APP_DB_NAME = "photos"
 @Module
 class RepositoryModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideAppDataSource(appDataSource: AppDataSource): AppDataSource{
-//        return appDataSource
-//    }
-
     @Provides
     @Singleton
     fun providePhotoItemsDatabase(context: Context): AppDatabase {

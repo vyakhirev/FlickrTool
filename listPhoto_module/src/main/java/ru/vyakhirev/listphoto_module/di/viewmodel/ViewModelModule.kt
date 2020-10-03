@@ -4,29 +4,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.multibindings.IntoMap
 import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
+import javax.inject.Singleton
 
 @Module
-abstract class ViewModelModule {
+interface  ViewModelModule {
 
-    //    @Provides
-//    @Singleton
-//    fun viewModelsHolder(): @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel> {
-//        return mutableMapOf()
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun bindsFactory(map: @JvmSuppressWildcards MutableMap<Class<out ViewModel>, ViewModel>): ViewModelProvider.Factory {
-//        return ru.vyakhirev.listphoto_module.di.viewmodel.ViewModelFactoryProvider(map)
-//    }
+    companion object{
+        @Provides
+        @Singleton
+        fun viewModelsHolder(): @JvmSuppressWildcards HashMap<Class<out ViewModel>, ViewModel> {
+            return HashMap()
+        }
+    }
+
     @Binds
-    internal abstract fun bindViewModelFactory(factory: ViewModelFactoryProvider): ViewModelProvider.Factory
+      fun bindViewModelFactory(factory: ViewModelFactoryProvider): ViewModelProvider.Factory
 
     @Binds
     @IntoMap
     @ViewModelKey(ListPhotosViewModel::class)
-    abstract fun bindsListPhotosViewModel(listPhotosViewModel: ListPhotosViewModel): ViewModel
-
+     fun bindsListPhotosViewModel(listPhotosViewModel: ListPhotosViewModel): ViewModel
 }
