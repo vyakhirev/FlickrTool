@@ -16,7 +16,6 @@ abstract class ListPhotoModule {
 
         @Provides
         @Singleton
-        @JvmStatic
         fun provideListPhotoViewModel(
             map: @JvmSuppressWildcards HashMap<Class<out ViewModel>, ViewModel>,
             getPhotoSearchUseCase: GetPhotoSearchUseCase,

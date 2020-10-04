@@ -1,10 +1,24 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
+def  android_lint_version = '26.5.2'
+def detekt_version = '1.10.0'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Kotlin
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Android Lint
+    compileOnly "com.android.tools.lint:lint-api:$android_lint_version"
+    compileOnly "com.android.tools.lint:lint-checks:$android_lint_version"
+    testImplementation "com.android.tools.lint:lint-tests:$android_lint_version"
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+jar {
+    manifest {
+        attributes('Lint-Registry-v2': 'ru.vyakhirev.flickrtool.lint_Checks.CustomIssueRegistry')
+    }
+}
