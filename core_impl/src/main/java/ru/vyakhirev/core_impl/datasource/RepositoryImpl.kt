@@ -1,6 +1,5 @@
 package ru.vyakhirev.core_impl.datasource
 
-import androidx.annotation.VisibleForTesting
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import ru.vyakhirev.core_api.datasource.Repository
@@ -44,7 +43,7 @@ constructor(
         return remoteDataSource
             .getPhotoSearchResult(query, page, perPage)
             .doOnNext {
-                localDataSource.updatePhotoItemList(it.photo)
+//                localDataSource.updatePhotoItemList(it.photo)
                 if (page <= 1)
                     cachedPhotoItemList.clear()
                 if (it.page >= it.pages)

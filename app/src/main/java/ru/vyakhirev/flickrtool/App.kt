@@ -1,10 +1,10 @@
 package ru.vyakhirev.flickrtool
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
 import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.core_api.mediator.ProvidersFacade
 
-class App : MultiDexApplication(), AppWithFacade {
+open class App : Application(), AppWithFacade {
 
     companion object {
         private var facadeComponent: FacadeComponent? = null

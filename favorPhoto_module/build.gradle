@@ -16,6 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     buildTypes {
         release {
@@ -28,7 +31,12 @@ def room_version = '2.2.5'
 def dagger_version = '2.28'
 def rxJavaVersion = '2.1.1'
 def glide_version='4.11.0'
-
+def photoView_version = '2.3.0'
+def mockito_version='2.18.3'
+def retrofit_version = '2.9.0'
+def gsonVersion = '2.8.4'
+def retrofitVersion = '2.6.1'
+def okhttpVersion = '4.2.1'
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -37,18 +45,31 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation project(path: ':app')
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.2.0'
-
     implementation project(':core')
 
+    //PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.
+    implementation "com.github.chrisbanes:PhotoView:$photoView_version"
     //    Dagger2
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+//
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    implementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     //      Room
     implementation "androidx.room:room-runtime:$room_version"
@@ -63,4 +84,25 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Espresso dependencies
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
+    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
+//    androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.7.2'
+
+    //Robolectric
+    testImplementation 'org.robolectric:robolectric:4.4'
+//testInstrumentationRunner 'org.robolectric.RobolectricGradleTestRunner'
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.4'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:4.3'
+    testImplementation 'androidx.test:core:1.2.0'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.1'
+    testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    testImplementation "com.squareup.okhttp3:mockwebserver:3.12.6"
 }
