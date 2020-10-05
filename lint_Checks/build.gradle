@@ -19,6 +19,6 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 jar {
     manifest {
-        attributes('Lint-Registry-v2': 'ru.vyakhirev.flickrtool.lint_Checks.CustomIssueRegistry')
+        attributes('Lint-Registry-v2': "ru.vyakhirev.flickrtool.lint_Checks.CustomIssueRegistry")
     }
 }
