@@ -36,6 +36,9 @@ class ListPhotosFragment : Fragment() {
     @Inject
     lateinit var bigPhotoMediator: BigPhotoMediator
 
+//    @Inject
+//    lateinit var navigator:Navigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

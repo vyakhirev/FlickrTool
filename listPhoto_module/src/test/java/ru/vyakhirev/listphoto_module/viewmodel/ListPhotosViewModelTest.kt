@@ -2,8 +2,6 @@ package ru.vyakhirev.listphoto_module.viewmodel
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -69,21 +67,6 @@ class ListPhotosViewModelTest {
             .test()
             .assertResult(expected)
             .assertNoErrors()
-    }
-
-    @Test
-    fun compositeDisposableCleared() {
-        val d = CompositeDisposable()
-        listPhotosViewModel.disposable = d
-
-        assertEquals(0, listPhotosViewModel.disposable.size())
-
-        d.add(Observable.just("").subscribe())
-        assertEquals(1, listPhotosViewModel.disposable.size())
-
-        d.clear()
-
-        assertEquals(0, listPhotosViewModel.disposable.size())
     }
 
 }
