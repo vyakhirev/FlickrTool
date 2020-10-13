@@ -20,4 +20,5 @@ open class App : Application(), AppWithFacade {
         super.onCreate()
         (getFacade() as FacadeComponent).inject(this)
     }
+
 }

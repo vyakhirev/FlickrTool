@@ -2,13 +2,9 @@ package ru.vyakhirev.listphoto_module
 
 import android.os.Build
 import android.os.Looper
-import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions
 import kotlinx.android.synthetic.main.photo_item.view.*
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -32,7 +28,6 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 @Config(application = TestApp::class, sdk = [Build.VERSION_CODES.O_MR1])
-//@LooperMode(LooperMode.Mode.PAUSED)
 class ListPhotosFragmentTest {
 
     @get:Rule
@@ -48,14 +43,14 @@ class ListPhotosFragmentTest {
 
     lateinit var activityController: ActivityController<FragmentActivity>
 
-    private fun clickOnViewChild(viewId: Int) = object : ViewAction {
-        override fun getConstraints() = null
-
-        override fun getDescription() = "Click on a child view with specified id."
-
-        override fun perform(uiController: UiController, view: View) =
-            ViewActions.click().perform(uiController, view.findViewById<View>(viewId))
-    }
+//    private fun clickOnViewChild(viewId: Int) = object : ViewAction {
+//        override fun getConstraints() = null
+//
+//        override fun getDescription() = "Click on a child view with specified id."
+//
+//        override fun perform(uiController: UiController, view: View) =
+//            ViewActions.click().perform(uiController, view.findViewById<View>(viewId))
+//    }
 
 
     @Before
@@ -68,7 +63,7 @@ class ListPhotosFragmentTest {
             .setBodyDelay(0, TimeUnit.MILLISECONDS)
 
         mockWebServer.enqueue(response)
-        mockWebServer.start(8080)
+        mockWebServer.start(8090)
 
         fragment = ListPhotosFragment()
 
@@ -95,15 +90,13 @@ class ListPhotosFragmentTest {
 
     @Test
     fun `should load photo title into title_TV`() {
-
         shadowOf(Looper.getMainLooper()).idle()
         val recycler = fragment.view!!.findViewById(R.id.listPhotoRV) as RecyclerView
         // workaround robolectric recyclerView issue
         recycler.measure(0, 0)
         recycler.layout(0, 0, 100, 1000)
-        val expected =
-            (recycler.findViewHolderForAdapterPosition(0)!!.itemView.title_TV as TextView).text
 
+        val expected = "full moon"
         assertEquals(
             expected,
             (recycler.findViewHolderForAdapterPosition(0)!!.itemView.title_TV as TextView).text

@@ -39,6 +39,9 @@ class ListPhotosFragment : Fragment() {
 //    @Inject
 //    lateinit var navigator:Navigator
 
+//    @Inject
+//    lateinit var bigPhotoNavigator: OpenBigPhoto
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -72,14 +75,6 @@ class ListPhotosFragment : Fragment() {
                     bundle.apply {
                         putString(IMAGE_URL, it.getFlickrImageLink('z'))
                     }
-
-//                    activity.application.
-//                    bigPhotoMediator.openBigPhotoScreen(
-//                        parentFragmentManager
-//                    )
-//                    fragmentManager?.beginTransaction()
-//                        ?.replace(R.id.fragmentContainer, ListPhotosFragment.newInstance())
-//                        ?.commit()
                 },
                 favorStarClickListener = {
                     Log.d("volttier", it.title!!)

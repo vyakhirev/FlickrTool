@@ -11,12 +11,13 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 import ru.vyakhirev.listphoto_module.adapter.ViewHolderPhotoItem
 
 @RunWith(AndroidJUnit4::class)
+@Config(application = TestApp::class)
 class FavorClickTest {
 
-    @Test
     private fun clickOnViewChild(viewId: Int) = object : ViewAction {
         override fun getConstraints() = null
 

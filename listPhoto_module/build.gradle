@@ -17,7 +17,8 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.android.dagger.MyCustomTestRunner"
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         vectorDrawables.useSupportLibrary = true
     }
@@ -56,6 +57,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.2.0'
+
+    //Core
     implementation project(':core')
 
     //PhotoView aims to help produce an easily usable implementation of a zooming Android ImageView.
@@ -109,5 +112,7 @@ dependencies {
     testImplementation 'androidx.test:core:1.2.0'
     testImplementation 'androidx.test.ext:junit-ktx:1.1.1'
     testImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 //    testImplementation "com.squareup.okhttp3:mockwebserver:3.12.6"
 }

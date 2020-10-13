@@ -21,6 +21,7 @@ class AppDatasourceModule {
             AppDatabase::class.java, APP_DB_NAME
         ).build()
     }
+
     @Provides
     @Singleton
     fun provideLocalDataSource(localDataSource: LocalDataSource): AppDataSource {

@@ -23,7 +23,7 @@ class TestFlickrApiModule {
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
-            .baseUrl("http://localhost:8080/")
+            .baseUrl("http://localhost:8090/")
             .build()
     }
 

@@ -1,8 +1,6 @@
 package ru.vyakhirev.listphoto_module.di
 
-import dagger.Binds
 import dagger.Component
-import ru.vyakhirev.core_api.datasource.Repository
 import ru.vyakhirev.core_api.mediator.ProvidersFacade
 import ru.vyakhirev.listphoto_module.ListPhotosFragment
 import ru.vyakhirev.listphoto_module.di.viewmodel.DaggerViewModelComponent

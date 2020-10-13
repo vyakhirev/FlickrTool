@@ -1,43 +1,27 @@
 package ru.vyakhirev.listphoto_module.di
 
 import dagger.Component
-import ru.vyakhirev.core_api.mediator.AppWithFacade
+import retrofit2.Retrofit
+import ru.vyakhirev.flickrtool.App
+import ru.vyakhirev.flickrtool.AppComponent
 import ru.vyakhirev.listphoto_module.ListPhotosFragmentTest
 import javax.inject.Singleton
 
-@Component(modules = [TestFlickrApiModule::class])
 @Singleton
-interface TestAppComponent : AppWithFacade {
+@Component(modules = [TestFlickrApiModule::class])
+interface TestAppComponent : AppComponent {
+    fun inject(listPhotosFragmentTest: ListPhotosFragmentTest)
 
-    fun inject(listPhotosFragment: ListPhotosFragmentTest)
-}
-//@Component
-//@Singleton
-//interface TestAppComponent : AppWithFacade {
 //    companion object {
 //
-//        @Component.Builder
-//        internal interface Builder {
-//            @BindsInstance
-//            fun application(application: Application?): Builder?
-//            fun build(): TestAppComponent?
+//        fun create(): TestAppComponent {
+//            return DaggerTestAppComponent.builder().build()
 //        }
 //    }
-//
-//    fun inject(favorClickTest: FavorClickTest)
-//    fun inject(listPhotosFragment: ListPhotosFragment)
-//}
-//companion object {
-//
-//    fun create(providersFacade: ProvidersFacade): ListPhotoComponent {
-//        val vmComponent = DaggerViewModelComponent
-//            .builder()
-//            .providersFacade(providersFacade)
-//            .build()
-//        return DaggerListPhotoComponent
-//            .builder()
-//            .viewModelsProvider(vmComponent)
-//            .providersFacade(providersFacade)
-//            .build()
-//    }
-//}
+
+    fun provideRetrofit(): Retrofit
+
+    fun inject(app: App)
+
+
+}
