@@ -2,13 +2,9 @@ package ru.vyakhirev.listphoto_module
 
 import android.os.Build
 import android.os.Looper
-import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions
 import kotlinx.android.synthetic.main.photo_item.view.*
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -48,14 +44,14 @@ class ListPhotosFragmentTest {
 
     lateinit var activityController: ActivityController<FragmentActivity>
 
-    private fun clickOnViewChild(viewId: Int) = object : ViewAction {
-        override fun getConstraints() = null
-
-        override fun getDescription() = "Click on a child view with specified id."
-
-        override fun perform(uiController: UiController, view: View) =
-            ViewActions.click().perform(uiController, view.findViewById<View>(viewId))
-    }
+//    private fun clickOnViewChild(viewId: Int) = object : ViewAction {
+//        override fun getConstraints() = null
+//
+//        override fun getDescription() = "Click on a child view with specified id."
+//
+//        override fun perform(uiController: UiController, view: View) =
+//            ViewActions.click().perform(uiController, view.findViewById<View>(viewId))
+//    }
 
 
     @Before
