@@ -14,9 +14,9 @@ import javax.inject.Singleton
 
 @Module
 class FlickrApiModule {
-    private val BASE_URL = "https://www.flickr.com"
-
-    //    private val BASE_URL = "http://localhost:8080/"
+//    private val BASE_URL = "https://www.flickr.com"
+//
+private val BASE_URL = "http://localhost:8090/"
     val k = 1
     val b: String = "see a"
 

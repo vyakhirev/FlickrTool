@@ -1,27 +1,17 @@
 package ru.vyakhirev.listphoto_module.di
 
 import dagger.Component
-import retrofit2.Retrofit
-import ru.vyakhirev.flickrtool.App
-import ru.vyakhirev.flickrtool.AppComponent
+import ru.vyakhirev.core_api.mediator.AppWithFacade
 import ru.vyakhirev.listphoto_module.ListPhotosFragmentTest
+import ru.vyakhirev.listphoto_module.TestApp
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [TestFlickrApiModule::class])
-interface TestAppComponent : AppComponent {
+interface TestAppComponent : AppWithFacade {
+
     fun inject(listPhotosFragmentTest: ListPhotosFragmentTest)
 
-//    companion object {
-//
-//        fun create(): TestAppComponent {
-//            return DaggerTestAppComponent.builder().build()
-//        }
-//    }
-
-    fun provideRetrofit(): Retrofit
-
-    fun inject(app: App)
-
+    fun inject(testApp: TestApp)
 
 }

@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
-        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+//        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
+//        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 //        bottomNavigation.findViewById<BottomNavigationItemView>(R.id.action_search).visibility=
 //            View.INVISIBLE
     }

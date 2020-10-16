@@ -37,7 +37,7 @@ class ListPhotosFragment : Fragment() {
     lateinit var bigPhotoMediator: BigPhotoMediator
 
 //    @Inject
-//    lateinit var navigator:Navigator
+//    lateinit var navig
 
 //    @Inject
 //    lateinit var bigPhotoNavigator: OpenBigPhoto
@@ -71,6 +71,7 @@ class ListPhotosFragment : Fragment() {
                 requireContext(),
                 mutableListOf(),
                 bigPhotoClickListener = {
+
                     val bundle = Bundle()
                     bundle.apply {
                         putString(IMAGE_URL, it.getFlickrImageLink('z'))

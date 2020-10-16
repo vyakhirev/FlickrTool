@@ -28,9 +28,9 @@ android {
                 }
             }
         }
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnit4Runner"
         vectorDrawables.useSupportLibrary = true
-        multiDexEnabled true
+//        multiDexEnabled true
     }
 
     buildTypes {

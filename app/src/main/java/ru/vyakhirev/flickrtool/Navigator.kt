@@ -6,8 +6,9 @@ import ru.vyakhirev.listphoto_module.ListPhotosFragment
 import ru.vyakhirev.listphoto_module.R
 import ru.vyakhirev.listphoto_module.navigator.OpenBigPhoto
 import ru.vyakhirev.listphoto_module.navigator.OpenListPhoto
+import javax.inject.Inject
 
-class Navigator : OpenBigPhoto, OpenListPhoto {
+class Navigator @Inject constructor() : OpenBigPhoto, OpenListPhoto {
     override fun openBigPhotoScreen(containerId: Int, fragmentManager: FragmentManager) {
         fragmentManager.beginTransaction()
             .replace(containerId, BigPhotoFragment.newInstance())

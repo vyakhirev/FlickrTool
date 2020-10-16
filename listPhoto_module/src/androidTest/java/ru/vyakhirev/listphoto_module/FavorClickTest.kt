@@ -1,7 +1,6 @@
 package ru.vyakhirev.listphoto_module
 
 import android.view.View
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -31,7 +30,6 @@ class FavorClickTest {
     @Test
     fun testFavoritesAdd() {
 
-        val scenario = launchFragmentInContainer<ListPhotosFragment>()
         Espresso.onView(withId(R.id.listPhotoRV))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<ViewHolderPhotoItem>(
