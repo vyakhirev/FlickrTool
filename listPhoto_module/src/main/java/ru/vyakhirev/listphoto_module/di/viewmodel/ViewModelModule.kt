@@ -10,9 +10,9 @@ import ru.vyakhirev.listphoto_module.viewmodel.ListPhotosViewModel
 import javax.inject.Singleton
 
 @Module
-interface  ViewModelModule {
+interface ViewModelModule {
 
-    companion object{
+    companion object {
         @Provides
         @Singleton
         fun viewModelsHolder(): @JvmSuppressWildcards HashMap<Class<out ViewModel>, ViewModel> {
@@ -21,10 +21,10 @@ interface  ViewModelModule {
     }
 
     @Binds
-      fun bindViewModelFactory(factory: ViewModelFactoryProvider): ViewModelProvider.Factory
+    fun bindViewModelFactory(factory: ViewModelFactoryProvider): ViewModelProvider.Factory
 
     @Binds
     @IntoMap
     @ViewModelKey(ListPhotosViewModel::class)
-     fun bindsListPhotosViewModel(listPhotosViewModel: ListPhotosViewModel): ViewModel
+    fun bindsListPhotosViewModel(listPhotosViewModel: ListPhotosViewModel): ViewModel
 }

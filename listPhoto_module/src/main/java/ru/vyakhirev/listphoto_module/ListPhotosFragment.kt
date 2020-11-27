@@ -60,6 +60,7 @@ class ListPhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Log.d("kan","List photo fragment")
         adapter =
             ListPhotoAdapter(
                 requireContext(),
